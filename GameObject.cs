@@ -23,7 +23,6 @@ namespace HackTheWorld
         /// サイズ。衝突判定に用いる。矩形で与えられる。
         /// </summary>
         private Vector _size;
-
         /// <summary>
         /// 生死フラグ。基本はdelete以外で弄らないように。
         /// </summary>
@@ -31,14 +30,14 @@ namespace HackTheWorld
         /// <summary>
         /// オブジェクトのタイプ。enemy、player、bullet、itemなど。
         /// </summary>
-        public ObjectType Type { protected set; get; }
+        private ObjectType _objectType;
 
         #region コンストラクタ
 
         /// <summary>
         /// 何も指定せずにオブジェクトを出現させる。
         /// </summary>
-        public GameObject() : base() { }
+        public GameObject() { }
 
         /// <summary>
         ///  位置を指定してオブジェクトを出現させる。
@@ -236,6 +235,15 @@ namespace HackTheWorld
             this._isAlive = false;
         }
 
+        /// <summary>
+        /// オブジェクトのタイプを返す。
+        /// </summary>
+        /// <returns></returns>
+        public virtual ObjectType GetObjectType()
+        {
+            return this._objectType;
+        }
+
         #endregion
 
 
@@ -319,7 +327,7 @@ namespace HackTheWorld
         public virtual bool CollideWith(GameObject obj)
         {
             if (!obj._isAlive) return false;
-            if (Type == obj.Type) return false;
+            if (_objectType == obj._objectType) return false;
             return this.Intersects(obj);
         }
 
