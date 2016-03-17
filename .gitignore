@@ -1,0 +1,9 @@
+*.exe
+*.pdb
+*.config
+*.manifest
+
+obj/
+.vs/
+
+!App.config
