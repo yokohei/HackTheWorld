@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Drawing;
+using static HackTheWorld.Constants;
 
 namespace HackTheWorld
 {
     class TitleScene : Scene
     {
-        protected override void Cleanup()
+        public override void Cleanup()
         {
-            throw new NotImplementedException();
         }
 
-        protected override void Startup()
+        public override void Startup()
         {
-            throw new NotImplementedException();
         }
 
-        protected override void Update()
+        public override void Update()
         {
             Console.WriteLine("title scene.");
+            GraphicsContext.FillRectangle(Brushes.Blue, 100, 100, 100, 100);
         }
     }
 }

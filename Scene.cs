@@ -5,9 +5,9 @@ namespace HackTheWorld
 {
     abstract class Scene
     {
-        static Stack<Scene> _sceneStack;
+        private static Stack<Scene> _sceneStack = new Stack<Scene>();
 
-        static Scene Current
+        public static Scene Current
         {
             set
             {
@@ -23,21 +23,21 @@ namespace HackTheWorld
             }
         }
 
-        static void Push(Scene s)
+        public static void Push(Scene s)
         {
             s.Startup();
             _sceneStack.Push(s);
         }
 
-        static void Pop()
+        public static void Pop()
         {
             var s = _sceneStack.Pop();
             s.Cleanup();
         }
 
-        protected abstract void Update();
-        protected abstract void Cleanup();
-        protected abstract void Startup();
+        public abstract void Update();
+        public abstract void Cleanup();
+        public abstract void Startup();
 
     }
 }

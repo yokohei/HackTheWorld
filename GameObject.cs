@@ -347,11 +347,11 @@ namespace HackTheWorld
         /// 自分が持っている座標に自分が持っている大きさの矩形を描画する。
         /// </summary>
         /// <param name="g">このグラフィックスコンテクストにオブジェクトを描画する。</param>
-        public virtual void Draw(Graphics g)
+        public virtual void Draw()
         {
             if(this._isAlive)
             {
-                g.FillRectangle(Brushes.Red, GetMinX(), GetMinY(), GetWidth(), GetHeight());
+                GraphicsContext.FillRectangle(Brushes.Red, GetMinX(), GetMinY(), GetWidth(), GetHeight());
             }
         }
 

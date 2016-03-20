@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
+using static HackTheWorld.Constants;
 
 namespace HackTheWorld
 {
     class GameScene : Scene
     {
-        protected override void Cleanup()
+        public override void Cleanup()
         {
-            throw new NotImplementedException();
         }
 
-        protected override void Startup()
+        public override void Startup()
         {
-            throw new NotImplementedException();
         }
 
-        protected override void Update()
+        public override void Update()
         {
             Console.WriteLine("game scene.");
+            GraphicsContext.FillRectangle(Brushes.Red, 100, 100, 100, 100);
         }
     }
 }
