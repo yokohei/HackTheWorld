@@ -37,7 +37,7 @@ namespace HackTheWorld
             {
                 frame++;
 
-                if (frame == 200)
+                if (frame == 300)
                 {
                     Scene.Push(new GameScene());
                 }
