@@ -6,18 +6,21 @@ namespace HackTheWorld
 {
     class TitleScene : Scene
     {
+        Image img;
         public override void Cleanup()
         {
         }
 
         public override void Startup()
         {
+            img = System.Drawing.Image.FromFile(@"inouemasatosennsei.png");
         }
 
         public override void Update()
         {
             Console.WriteLine("title scene.");
-            GraphicsContext.FillRectangle(Brushes.Blue, 100, 100, 100, 100);
+            GraphicsContext.DrawImage(img, 0, 0,192,256);
+
         }
     }
 }

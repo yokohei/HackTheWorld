@@ -8,18 +8,21 @@ namespace HackTheWorld
 {
     class GameScene : Scene
     {
+        Image img;
         public override void Cleanup()
         {
         }
 
         public override void Startup()
         {
+            img = System.Drawing.Image.FromFile(@"inoue.jpg");
         }
 
         public override void Update()
         {
             Console.WriteLine("game scene.");
-            GraphicsContext.FillRectangle(Brushes.Red, 100, 100, 100, 100);
+            GraphicsContext.DrawImage(img, 0, 0, 192, 256);
+
         }
     }
 }
