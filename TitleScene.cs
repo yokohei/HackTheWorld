@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using static HackTheWorld.Constants;
 
 namespace HackTheWorld
 {
     class TitleScene : Scene
     {
-        Image img;
+        Image _img;
+
         public override void Cleanup()
         {
         }
 
         public override void Startup()
         {
-            img = System.Drawing.Image.FromFile(@"inouemasatosennsei.png");
+            _img = System.Drawing.Image.FromFile(@"inouemasatosennsei.png");
         }
 
         public override void Update()
         {
             Console.WriteLine("title scene.");
-            GraphicsContext.DrawImage(img, 0, 0,192,256);
+            GraphicsContext.DrawImage(_img, 0, 0,192,256);
 
         }
     }
