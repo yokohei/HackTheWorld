@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HackTheWorld
 {
@@ -24,6 +25,8 @@ namespace HackTheWorld
         /// </summary>
         public static readonly int ScreenWidth = 1280;
         public static readonly int ScreenHeight = 720;
+
+        public static List<Keys> pressedKeys = new List<Keys>();
 
         /// <summary>
         /// オブジェクトのタイプ。

@@ -6,7 +6,7 @@ using static HackTheWorld.Constants;
 
 namespace HackTheWorld
 {
-    class GameScene : Scene
+    class MasatoScene1 : Scene
     {
         Image _img;
         public override void Cleanup()
@@ -15,7 +15,7 @@ namespace HackTheWorld
 
         public override void Startup()
         {
-            _img = System.Drawing.Image.FromFile(@"image\masato.jpg");
+            _img = Image.FromFile(@"image\masato1.jpg");
         }
 
         public override void Update()

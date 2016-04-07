@@ -11,7 +11,7 @@ namespace HackTheWorld
     class MenuItem : GameObject
     {
         private readonly Image[] _images;
-        bool _selected = false;
+        public bool _selected = false;
 
         public MenuItem(Image defaultImage, Image selectedImage)
         {
