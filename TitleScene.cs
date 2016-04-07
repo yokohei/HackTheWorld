@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static HackTheWorld.Constants;
 
@@ -12,7 +13,6 @@ namespace HackTheWorld
         private Image[] _menuImages;
         private MenuItem[] _menu;
         private int _cursor;
-        private Stopwatch _sw;
 
         public override void Cleanup()
         {
@@ -20,8 +20,6 @@ namespace HackTheWorld
 
         public override void Startup()
         {
-            _sw = new Stopwatch();
-            _sw.Start();
             _transiting = false;
             _cursor = 0;
             _menuImages = new Image[10];
@@ -45,23 +43,26 @@ namespace HackTheWorld
 
         public override void Update()
         {
-//            Console.WriteLine("title scene.");
-
             if (pressedKeys.Contains(Keys.Down) && !_transiting)
             {
-                _cursor++;
+                _cursor = (_cursor + 1) % 5;
                 _transiting = true;
-                _sw.Reset();
-                _sw.Start();
+                Task.Run(() => {
+                    Thread.Sleep(200);
+                    _transiting = false;
+                });
             }
+
             if (pressedKeys.Contains(Keys.Up) && !_transiting)
             {
-                _cursor--;
+                _cursor = (_cursor + 4) % 5;
                 _transiting = true;
-                _sw.Reset();
-                _sw.Start();
+                Task.Run(() => {
+                    Thread.Sleep(200);
+                    _transiting = false;
+                });
             }
-            _cursor = (_cursor + 5) % 5;
+
             if (pressedKeys.Contains(Keys.Z) && !_transiting)
             {
                 switch (_cursor)
@@ -82,19 +83,17 @@ namespace HackTheWorld
                         Application.Exit();
                         break;
                 }
-                _transiting = true;
-                _sw.Reset();
-                _sw.Start();
             }
 
-            if (_sw.ElapsedMilliseconds > 200)
+            // 下に戻っちゃうのは入力を pushed と pressed に分ければ解決する。
+            if (pressedKeys.Contains(Keys.X) && !_transiting)
             {
-                _transiting = false;
+                _cursor = 4;
             }
 
-            for (int i = 0; i < 5; i++)
+            foreach (var item in _menu)
             {
-                _menu[i]._selected = false;
+                item._selected = false;
             }
             _menu[_cursor]._selected = true;
 
