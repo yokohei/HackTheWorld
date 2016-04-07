@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,6 +10,8 @@ namespace HackTheWorld
     class MasatoScene3 : Scene
     {
         Image _img;
+        private ProcessfulObject pobj;
+        private IEnumerator processes;
         public override void Cleanup()
         {
         }
@@ -16,6 +19,14 @@ namespace HackTheWorld
         public override void Startup()
         {
             _img = Image.FromFile(@"image\masato3.jpg");
+            pobj = new ProcessfulObject(new Process[4] {
+                new Process(obj => obj.SetSize(10, 10), 60),
+                new Process(obj => obj.SetSize(100, 100), 60),
+                new Process(obj => obj.SetSize(30, 30), 60),
+                new Process(obj => obj.SetSize(300, 300), 60)
+            });
+            processes = pobj.GetEnumerator();
+
         }
 
         public override void Update()
@@ -24,9 +35,12 @@ namespace HackTheWorld
             {
                 Scene.Pop();
             }
-            
+
+            processes.MoveNext();
+
             GraphicsContext.Clear(Color.White);
             GraphicsContext.DrawImage(_img, 0, 0);
+            pobj.Draw();
 
         }
     }
