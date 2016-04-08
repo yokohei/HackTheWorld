@@ -9,7 +9,6 @@ namespace HackTheWorld
 {
     class TitleScene : Scene
     {
-        private bool _transiting;
         private Image[] _menuImages;
         private MenuItem[] _menu;
         private int _cursor;
@@ -20,7 +19,6 @@ namespace HackTheWorld
 
         public override void Startup()
         {
-            _transiting = false;
             _cursor = 0;
             _menuImages = new Image[10];
             _menu = new MenuItem[5];
@@ -43,27 +41,17 @@ namespace HackTheWorld
 
         public override void Update()
         {
-            if (pressedKeys.Contains(Keys.Down) && !_transiting)
+            if (Input.Down.Pushed)
             {
                 _cursor = (_cursor + 1) % 5;
-                _transiting = true;
-                Task.Run(() => {
-                    Thread.Sleep(200);
-                    _transiting = false;
-                });
             }
 
-            if (pressedKeys.Contains(Keys.Up) && !_transiting)
+            if (Input.Up.Pushed)
             {
                 _cursor = (_cursor + 4) % 5;
-                _transiting = true;
-                Task.Run(() => {
-                    Thread.Sleep(200);
-                    _transiting = false;
-                });
             }
 
-            if (pressedKeys.Contains(Keys.Z) && !_transiting)
+            if (Input.Sp1.Pushed)
             {
                 switch (_cursor)
                 {
@@ -86,7 +74,7 @@ namespace HackTheWorld
             }
 
             // 下に戻っちゃうのは入力を pushed と pressed に分ければ解決する。
-            if (pressedKeys.Contains(Keys.X) && !_transiting)
+            if (Input.Sp2.Pushed)
             {
                 _cursor = 4;
             }

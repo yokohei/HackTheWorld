@@ -12,7 +12,7 @@ namespace HackTheWorld
 {
     class ProcessfulObject : GameObject, IEnumerable
     {
-        private Process[] _processes;
+        private readonly Process[] _processes;
 
         public ProcessfulObject(Process[] processes) : base(500, 300, 100, 100)
         {

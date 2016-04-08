@@ -21,7 +21,7 @@ namespace HackTheWorld
             _img = Image.FromFile(@"image\masato3.jpg");
             pobj = new ProcessfulObject(new Process[4] {
                 new Process(obj => obj.SetSize(10, 10), 60),
-                new Process(obj => obj.SetSize(100, 100), 60),
+                new Process(obj => { }, 60),
                 new Process(obj => obj.SetSize(30, 30), 60),
                 new Process(obj => obj.SetSize(300, 300), 60)
             });
@@ -31,7 +31,7 @@ namespace HackTheWorld
 
         public override void Update()
         {
-            if (pressedKeys.Contains(Keys.X))
+            if (Input.Sp2.Pushed)
             {
                 Scene.Pop();
             }

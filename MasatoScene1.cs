@@ -20,7 +20,7 @@ namespace HackTheWorld
 
         public override void Update()
         {
-            if (pressedKeys.Contains(Keys.X))
+            if (Input.Sp2.Pushed)
             {
                 Scene.Pop();
             }

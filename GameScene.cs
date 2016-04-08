@@ -15,12 +15,12 @@ namespace HackTheWorld
 
         public override void Startup()
         {
-            _img = System.Drawing.Image.FromFile(@"image\masato.jpg");
+            _img = Image.FromFile(@"image\masato.jpg");
         }
 
         public override void Update()
         {
-            if (pressedKeys.Contains(Keys.X))
+            if (Input.Sp2.Pushed)
             {
                 Scene.Pop();
             }
