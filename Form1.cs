@@ -9,12 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static HackTheWorld.Constants;
+using static HackTheWorld.Input;
 
 namespace HackTheWorld
 {
     public partial class Form1 : Form
     {
         private Bitmap _bmp;
+        private LinkedList<Keys> pressedKeys; 
 
         public Form1()
         {
@@ -29,23 +31,14 @@ namespace HackTheWorld
         private void MainProcess()
         {
             _bmp = new Bitmap(ScreenWidth, ScreenHeight);
+            pressedKeys = new LinkedList<Keys>();
             GraphicsContext = Graphics.FromImage(_bmp);
             Scene.Current = new TitleScene();
-            int frame = 0;
 
             while (!IsDisposed) // 毎フレーム呼ばれる処理
             {
-                frame++;
 
-                if (frame == 200)
-                {
-                    Scene.Push(new GameScene());
-                }
-
-                if (frame == 500)
-                {
-                    Scene.Pop();
-                }
+                Input.Update(pressedKeys);
 
                 // プレイヤーとステージをアップデート
                 Scene.Current.Update();
@@ -55,6 +48,25 @@ namespace HackTheWorld
 
             }
 
+        }
+
+        /// <summary>
+        /// キー入力取得用。
+        /// 押されたキーをpressedKeysに格納する。
+        /// </summary>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (!pressedKeys.Contains(e.KeyCode)) pressedKeys.AddLast(e.KeyCode);
+            Console.WriteLine(String.Join(",", pressedKeys));
+        }
+        /// <summary>
+        /// キー入力取得用。
+        /// キーが離されるとpressedKeysから除外する。
+        /// </summary>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            pressedKeys.Remove(e.KeyCode);
+            Console.WriteLine(String.Join(",", pressedKeys));
         }
 
         protected override void OnPaint(PaintEventArgs e)
